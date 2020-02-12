@@ -1,7 +1,6 @@
-name: Edit UUIDs
-description: 'Edit UUIDs based on Content Type'
-package: 'Node'
+name: Edit UUID
+description: 'Add or Update custom UUID of an entity'
 core: 8.x
 type: module
-configure: edit_uuid.settings
+configure: entity.edit_uuid_config.collection
 project: 'edit_uuid'

@@ -10,7 +10,7 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
  *
  * @ConfigEntityType(
  *   id = "edit_uuid_config",
- *   label = @Translation("Show Hide Tabs configuration"),
+ *   label = @Translation("Edit UUID configuration"),
  *   handlers = {
  *     "storage" = "Drupal\edit_uuid\EditUuidConfigStorage",
  *     "access" = "Drupal\edit_uuid\EditUuidConfigAccessControlHandler",

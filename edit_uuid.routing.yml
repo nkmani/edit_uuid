@@ -1,10 +1,10 @@
 entity.edit_uuid_config.delete_form:
-  path: '/admin/config/development/edit-uuid-config/manage/{edit-uuid-config}/delete'
+  path: '/admin/config/development/edit-uuid-config/manage/{edit_uuid_config}/delete'
   defaults:
     _entity_form: 'edit_uuid_config.delete'
     _title: 'Delete Edit UUID configuration'
   requirements:
-    _entity_access: 'edit_uuid_config.delete'
+    _permission: 'administer edit_uuid_config configuration'
 
 entity.edit_uuid_config.collection:
   path: '/admin/config/development/edit-uuid-config'

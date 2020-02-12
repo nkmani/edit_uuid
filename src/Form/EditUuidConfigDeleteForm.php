@@ -4,7 +4,7 @@ namespace Drupal\edit_uuid\Form;
 
 use Drupal\Core\Entity\EntityDeleteForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\modal_config\ModalConfigStorage;
+use Drupal\edit_uuid\EditUuidConfigStorage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Database\Connection;
 
@@ -30,7 +30,7 @@ class EditUuidConfigDeleteForm extends EntityDeleteForm {
   /**
    * Constructs a EditUuidConfigDeleteForm object.
    */
-  public function __construct(Connection $database, ModalConfigStorage $storage) {
+  public function __construct(Connection $database, EditUuidConfigStorage $storage) {
     $this->database = $database;
     $this->storage = $storage;
   }
