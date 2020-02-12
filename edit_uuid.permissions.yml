@@ -1,0 +1,4 @@
+administer edit_uuid_config configuration:
+ title: 'Administer Edit UUID'
+ description: 'Perform administration of EDit UUID'
+ restrict access: false

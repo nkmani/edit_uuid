@@ -1,0 +1,7 @@
+name: Edit UUIDs
+description: 'Edit UUIDs based on Content Type'
+package: 'Node'
+core: 8.x
+type: module
+configure: edit_uuid.settings
+project: 'edit_uuid'

@@ -1,0 +1,4 @@
+edit_uuid.settings:
+  title: 'Edit UUIDs Settings'
+  route_name: edit_uuid.settings
+  base_route: system.admin_config_development
