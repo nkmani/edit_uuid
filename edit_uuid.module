@@ -53,6 +53,7 @@ function edit_uuid_form_alter(&$form, FormStateInterface $form_state, $form_id) 
           $form['uuid']['#type'] = "textfield";
           $form['uuid']['#default_value'] = $entity->get('uuid')->value;
           $form['#validate'][] = 'edit_uuid_form_validate';
+          $form['uuid']['#disabled'] = $value->configType();
         }
       }
     }

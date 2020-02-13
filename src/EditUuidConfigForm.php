@@ -84,13 +84,12 @@ class EditUuidConfigForm extends BundleEntityFormBase {
       '#validated' => TRUE,
     ];
 
-    /* $form['config_value'] = [
-    '#type' => 'textfield',
-    '#title' => t('Value'),
-    '#description' => t('Configuration value'),
-    '#required' => TRUE,
-    '#default_value' => $entity->ConfigValue(),
-    ];*/
+    $form['config_type'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Just show UUID & disable editing'),
+      '#description' => t('Selecting this option will just show the UUID and it can be edited'),
+      '#default_value' => $entity->ConfigType(),
+    ];
 
     $form['actions']['submit']['#value'] = t('Create new configuration');
     $form['actions']['submit']['#limit_validation_errors'] = [];

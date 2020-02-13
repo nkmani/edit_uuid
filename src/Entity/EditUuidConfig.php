@@ -74,4 +74,10 @@ class EditUuidConfig extends ConfigEntityBase implements ConfigEntityInterface {
     return $this->get('config_value');
   }
 
+ /**
+   * Provides configuration type of config.
+   */
+  public function configType() {
+    return $this->get('config_type');
+  }
 }

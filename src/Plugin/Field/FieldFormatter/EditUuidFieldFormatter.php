@@ -9,7 +9,7 @@ use Drupal\Core\Field\FormatterBase;
  * Plugin implementation of the 'uuid' formatter.
  *
  * @FieldFormatter(
- *   id = "uuid",
+ *   id = "edit_uuid",
  *   label = @Translation("UUID"),
  *   field_types = {
  *     "uuid",
