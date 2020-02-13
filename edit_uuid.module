@@ -10,6 +10,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Component\Uuid\Uuid;
 use Drupal\Component\Uuid\Php;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * Implements hook_help().
@@ -90,5 +92,15 @@ function edit_uuid_form_validate(array $form, FormStateInterface $form_state) {
         $form_state->setErrorByName("uuid", t('UUID Aready exists'));
       }
     }
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function edit_uuid_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if (($field_name = $entity_type->getKey('uuid')) && $field = $fields[$field_name]) {
+    assert($field instanceof BaseFieldDefinition);
+    $field->setDisplayConfigurable('view', TRUE);
   }
 }
