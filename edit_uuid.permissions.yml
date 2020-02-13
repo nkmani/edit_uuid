@@ -5,4 +5,8 @@ administer edit_uuid_config configuration:
 show edit_uuid:
  title: 'Show Edit UUID in Form'
  description: 'Show of EDit UUID'
- restrict access: false 
+ restrict access: false
+edit edit_uuid:
+ title: 'Edit UUID'
+ description: 'this permission will enable editing UUID in form'
+ restrict access: false   
