@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\ContentEntityType;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Form handler for the EditUuid config entity edit forms.
@@ -105,12 +106,12 @@ class EditUuidConfigForm extends BundleEntityFormBase {
     $entity->save();
 
     if ($is_new) {
-      drupal_set_message(t('The %set_name EditUuid configuration has been created.', ['%set_name' => $entity->label()]));
+      $this->messenger()->addMessage($this->t('The %set_name EditUuid configuration has been created.', ['%set_name' => $entity->label()]));
     }
     else {
-      drupal_set_message(t('Updated EditUuid configuration name to %set-name.', ['%set-name' => $entity->label()]));
+      $this->messenger()->addMessage($this->t('Updated EditUuid configuration name to %set-name.', ['%set-name' => $entity->label()]));
     }
-    $form_state->setRedirectUrl($this->entity->urlInfo('collection'));
+    $form_state->setRedirectUrl($this->entity->toUrl('collection'));
   }
 
   /**
