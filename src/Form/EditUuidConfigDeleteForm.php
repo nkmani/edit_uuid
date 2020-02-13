@@ -3,7 +3,6 @@
 namespace Drupal\edit_uuid\Form;
 
 use Drupal\Core\Entity\EntityDeleteForm;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\edit_uuid\EditUuidConfigStorage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Database\Connection;

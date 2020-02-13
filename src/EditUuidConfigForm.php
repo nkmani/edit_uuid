@@ -24,7 +24,7 @@ class EditUuidConfigForm extends BundleEntityFormBase {
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => t('Settings Name'),
-      '#description' => t('Enter the name for this settings '),
+      '#description' => t('Enter the name for this settings'),
       '#required' => TRUE,
       '#default_value' => $entity->label(),
     ];
@@ -41,37 +41,39 @@ class EditUuidConfigForm extends BundleEntityFormBase {
       '#maxlength' => 23,
     ];
 
-$all = \Drupal::entityTypeManager()->getDefinitions();
-foreach ($all as $key => $value) {
-   if($value instanceof ContentEntityType) {
-    $entity_types[$key] = $value->getLabel(); 
-   }
-}
-     $form['config_key'] = [
+    $all = \Drupal::entityTypeManager()->getDefinitions();
+    foreach ($all as $key => $value) {
+      if ($value instanceof ContentEntityType) {
+        $entity_types[$key] = $value->getLabel();
+      }
+    }
+    $form['config_key'] = [
       '#type' => 'select',
       '#title' => t('Entity Type'),
       '#description' => t('Entity type'),
       '#required' => TRUE,
       '#options' => $entity_types,
       '#default_value' => $entity->ConfigKey(),
-      '#ajax' => ['callback' => [$this, 'getBundles'],  'event' => 'change',
-                  'method' => 'html',
-                  'wrapper' => 'bundle-to-update',
-                  'progress' => [
-                    'type' => 'throbber',
-                     'message' => NULL,
-                  ],
-                ],
+      '#ajax' => [
+        'callback' => [$this, 'getBundles'],
+        'event' => 'change',
+        'method' => 'html',
+        'wrapper' => 'bundle-to-update',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => NULL,
+        ],
+      ],
     ];
-     $options = [];
-    if($entity->ConfigKey() != "") {
+    $options = [];
+    if ($entity->ConfigKey() != "") {
       $bundlesObj = \Drupal::service('entity_type.bundle.info')->getBundleInfo($entity->ConfigKey());
       foreach ($bundlesObj as $key => $value) {
-         $options[$key] = $value['label'];
+        $options[$key] = $value['label'];
       }
     }
-   
-    $form['config_value'] = array(
+
+    $form['config_value'] = [
       '#title' => t('Bundle'),
       '#type' => 'select',
       '#description' => t('Select the bundles that you wish to show UUID in edit form'),
@@ -79,15 +81,15 @@ foreach ($all as $key => $value) {
       '#default_value' => $entity->ConfigValue(),
       '#attributes' => ["id" => 'bundle-to-update'],
       '#multiple' => TRUE,
-      '#validated' => TRUE
-    );
-    
-   /* $form['config_value'] = [
-      '#type' => 'textfield',
-      '#title' => t('Value'),
-      '#description' => t('Configuration value'),
-      '#required' => TRUE,
-      '#default_value' => $entity->ConfigValue(),
+      '#validated' => TRUE,
+    ];
+
+    /* $form['config_value'] = [
+    '#type' => 'textfield',
+    '#title' => t('Value'),
+    '#description' => t('Configuration value'),
+    '#required' => TRUE,
+    '#default_value' => $entity->ConfigValue(),
     ];*/
 
     $form['actions']['submit']['#value'] = t('Create new configuration');
@@ -112,21 +114,24 @@ foreach ($all as $key => $value) {
     $form_state->setRedirectUrl($this->entity->urlInfo('collection'));
   }
 
-
-public function getBundles(array &$element, FormStateInterface $form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function getBundles(array &$element, FormStateInterface $form_state) {
     $triggeringElement = $form_state->getTriggeringElement();
     $value = $triggeringElement['#value'];
     $bundlesObj = \Drupal::service('entity_type.bundle.info')->getBundleInfo($value);
     foreach ($bundlesObj as $key => $value) {
-       $options[$key] = $value['label'] ;
+      $options[$key] = $value['label'];
     }
     $wrapper_id = $triggeringElement["#ajax"]["wrapper"];
     $renderedField = '';
     foreach ($options as $key => $value) {
-      $renderedField .= "<option value='".$key."'>".$value."</option>";
+      $renderedField .= "<option value='" . $key . "'>" . $value . "</option>";
     }
     $response = new AjaxResponse();
-    $response->addCommand(new HtmlCommand("#".$wrapper_id, $renderedField));
+    $response->addCommand(new HtmlCommand("#" . $wrapper_id, $renderedField));
     return $response;
   }
+
 }

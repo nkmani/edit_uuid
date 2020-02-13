@@ -26,7 +26,7 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label",
- *     "config_type" = "config_type", 
+ *     "config_type" = "config_type",
  *     "config_key" = "config_key",
  *     "config_value" = "config_value"
  *   },
@@ -38,7 +38,7 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
  *   config_export = {
  *     "id",
  *     "label",
- *     "config_type", 
+ *     "config_type",
  *     "config_key",
  *     "config_value",
  *   }

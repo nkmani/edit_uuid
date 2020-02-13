@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * @file
+ * This module is used to add or update custom uuid of an entity.
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
-use \Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityForm;
-use \Drupal\Component\Uuid\Uuid;
-use \Drupal\Component\Uuid\Php;
+use Drupal\Component\Uuid\Uuid;
+use Drupal\Component\Uuid\Php;
 
 /**
  * Implements hook_help().
@@ -37,20 +42,20 @@ function edit_uuid_form_alter(&$form, FormStateInterface $form_state, $form_id) 
   $form_object = $form_state->getFormObject();
   if ($form_object instanceof EntityForm) {
     $user = \Drupal::currentUser();
-    if($user->hasPermission('show edit_uuid')) {
+    if ($user->hasPermission('show edit_uuid')) {
       $entity = $form_object->getEntity();
       $edit_uuid_configs = \Drupal::entityTypeManager()->getStorage('edit_uuid_config')->loadMultiple();
       foreach ($edit_uuid_configs as $key => $value) {
-        if($value->configKey() == $entity->getEntityTypeId() && in_array($entity->bundle(), $value->configValue())) {
-            $form['uuid']['#title'] = t('UUID');
-            $form['uuid']['#type'] = "textfield"; 
-            $form['uuid']['#default_value']= $entity->get('uuid')->value;
-            $form['#validate'][] = 'edit_uuid_form_validate';
+        if ($value->configKey() == $entity->getEntityTypeId() && in_array($entity->bundle(), $value->configValue())) {
+          $form['uuid']['#title'] = t('UUID');
+          $form['uuid']['#type'] = "textfield";
+          $form['uuid']['#default_value'] = $entity->get('uuid')->value;
+          $form['#validate'][] = 'edit_uuid_form_validate';
         }
       }
-   }
-  }  
-}  
+    }
+  }
+}
 
 /**
  * Implements hook_form_validate().
@@ -59,30 +64,31 @@ function edit_uuid_form_validate(array $form, FormStateInterface $form_state) {
   $uuid = $form_state->getValue('uuid');
 
   $form_object = $form_state->getFormObject();
-if ($form_object instanceof EntityForm) {
-  $entity = $form_object->getEntity();
+  if ($form_object instanceof EntityForm) {
+    $entity = $form_object->getEntity();
 
-  $tid = $entity->id();
-  $existing_uuid = strtolower($entity->get('uuid')->value);
-        
-  if($uuid == "" && $tid == NULL) {
-     $uuid = Php::generate();
-  }elseif ($uuid == "" && $tid != NULL) {
-      $uuid = $existing_uuid;  
-  } 
-  
-  $uuid = strtolower($uuid);
-  $form_state->setValue("uuid", $uuid);
-  $form_state->set("uuid", $uuid);
-  if(!Uuid::isValid($uuid)) {
-    $form_state->setErrorByName("uuid",t('Not Valid UUID!'));
-  }
+    $tid = $entity->id();
+    $existing_uuid = strtolower($entity->get('uuid')->value);
 
-  if($uuid != $existing_uuid){
-    $count = \Drupal::entityTypeManager()->getStorage($entity->getEntityTypeId())->loadByProperties(['uuid' => $uuid]);
-       if(count($count) > 0) {
-         $form_state->setErrorByName("uuid",t(' UUID Aready exists'));
-       }    
+    if ($uuid == "" && $tid == NULL) {
+      $uuid = Php::generate();
+    }
+    elseif ($uuid == "" && $tid != NULL) {
+      $uuid = $existing_uuid;
+    }
+
+    $uuid = strtolower($uuid);
+    $form_state->setValue("uuid", $uuid);
+    $form_state->set("uuid", $uuid);
+    if (!Uuid::isValid($uuid)) {
+      $form_state->setErrorByName("uuid", t('Not Valid UUID!'));
+    }
+
+    if ($uuid != $existing_uuid) {
+      $count = \Drupal::entityTypeManager()->getStorage($entity->getEntityTypeId())->loadByProperties(['uuid' => $uuid]);
+      if (count($count) > 0) {
+        $form_state->setErrorByName("uuid", t('UUID Aready exists'));
+      }
+    }
   }
-}
 }
