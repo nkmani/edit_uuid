@@ -7,7 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\ContentEntityType;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Form handler for the EditUuid config entity edit forms.

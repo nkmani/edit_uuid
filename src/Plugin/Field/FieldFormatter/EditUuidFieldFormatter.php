@@ -18,14 +18,13 @@ use Drupal\Core\Field\FormatterBase;
  */
 class EditUuidFieldFormatter extends FormatterBase {
 
-  
   /**
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
-     $user = \Drupal::currentUser();
-    if($user->hasPermission('show edit_uuid')) {
+    $user = \Drupal::currentUser();
+    if ($user->hasPermission('show edit_uuid')) {
       foreach ($items as $delta => $item) {
         $elements[$delta] = [
           '#markup' => $item->value,

@@ -75,4 +75,3 @@ MAINTAINERS
 Current maintainers:
  * Karthikeyan Manivasagam (karthikeyan-manivasagam) -
    https://www.drupal.org/u/karthikeyan-manivasagam
-
