@@ -1,6 +1,6 @@
 name: Edit UUID
 description: 'Add or Update custom UUID of an entity'
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 type: module
 configure: entity.edit_uuid_config.collection
